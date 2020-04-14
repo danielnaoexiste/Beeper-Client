@@ -22,15 +22,15 @@
         "navlinkColor": "#b48ead"
     },
     {
-        "key": "ONE DARK",
-        "primaryColor": "#c678dd",
-        "errorColor": "#e06c75",
-        "textColor": "#fff",
-        "backgroundColor": "#282c34",
-        "foregroundColor": "#44475a",
-        "favouritesColor": "#98c379",
-        "dividerColor": "#abb2bf",
-        "navlinkColor": "#56b6c2"
+        "key": "PASTEL ANGEL",
+        "primaryColor": "#00b368",
+        "errorColor": "#db6b7e",
+        "textColor": "#121212",
+        "backgroundColor": "#FEF8EC",
+        "foregroundColor": "#f5efe4",
+        "favouritesColor": "#5998c0",
+        "dividerColor": "#8ca6a6",
+        "navlinkColor": "#0095a8"
     },
     {
         "key": "Noctis Light",
@@ -38,7 +38,7 @@
         "errorColor": "#ff5792",
         "textColor": "#121212",
         "backgroundColor": "#f2f1f8",
-        "foregroundColor": "#0c006b",
+        "foregroundColor": "#eae9f0",
         "favouritesColor": "#00bdd6",
         "dividerColor": "#9995b7",
         "navlinkColor": "#5842ff"

@@ -11,8 +11,8 @@ const TabBar = props => {
       style={{ height: 50 }}
       activeTintColor={props.theme.primaryColor}
       inactiveTintColor={props.theme.textColor}
-      activeBackgroundColor={props.theme.backgroundColor}
-      inactiveBackgroundColor={props.theme.backgroundColor}
+      activeBackgroundColor={props.theme.foregroundColor}
+      inactiveBackgroundColor={props.theme.foregroundColor}
       safeAreaInset={{ bottom: 'never' }}
     />
   );
