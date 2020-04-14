@@ -12,6 +12,7 @@ const ThemeScreen = ({ theme, themes, setTheme }) => {
           style.itemContainer,
           {
             backgroundColor: item.backgroundColor,
+            marginHorizontal: 20
           },
         ]}
       >

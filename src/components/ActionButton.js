@@ -3,10 +3,13 @@ import { StyleSheet, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { withTheme } from '../theming/themeProvider'
 import { navigate } from '../navigationRef';
+import {withNavigation} from 'react-navigation'
 
 const ActionButton = ({ navigation, routeName, iconName, theme }) => {
+    let id = 0
+    if (navigation) { id = navigation.getParam('id') }
     return (
-        <TouchableOpacity style={[styles.actionFloatButton, {backgroundColor: theme.primaryColor}]} onPress={() => navigate(routeName, { id: navigation.getParam('id') })}>
+        <TouchableOpacity style={[styles.actionFloatButton, {backgroundColor: theme.primaryColor}]} onPress={() => navigate(routeName, { id: id })}>
             <Icon type='feather' name={iconName} size={35} style={[styles.floatButton, {color: theme.foregroundColor}]} />
         </TouchableOpacity>
     )
@@ -28,4 +31,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default withTheme(ActionButton)
+export default withTheme(withNavigation(ActionButton))

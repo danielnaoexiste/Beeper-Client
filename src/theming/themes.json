@@ -1,6 +1,5 @@
 [
     {
-        "id": 0,
         "key": "DRACULA",
         "primaryColor": "#bd93f9",
         "errorColor": "#ff5555",
@@ -8,19 +7,40 @@
         "backgroundColor": "#282a36",
         "foregroundColor": "#44475a",
         "favouritesColor": "#678f75",
-        "dividerColor": "#f8f8f2" ,
+        "dividerColor": "#f8f8f2",
         "navlinkColor": "#6272a4"
     },
     {
-        "id": 1,
-        "key": "BEEPER-CLASSIC",
-        "primaryColor": "#BB86F6",
-        "errorColor": "#c33b3b",
+        "key": "NORD",
+        "primaryColor": "#88c0d0",
+        "errorColor": "#bf616a",
+        "textColor": "#e5e9f0",
+        "backgroundColor": "#434c5e",
+        "foregroundColor": "#3b4252",
+        "favouritesColor": "#5e81ac",
+        "dividerColor": "#81a1c1",
+        "navlinkColor": "#b48ead"
+    },
+    {
+        "key": "ONE DARK",
+        "primaryColor": "#c678dd",
+        "errorColor": "#e06c75",
         "textColor": "#fff",
-        "backgroundColor": "#343434",
-        "foregroundColor": "#121212",
-        "favouritesColor": "#678f75",
-        "dividerColor":  "#808080",
-        "navlinkColor": "#7777ff"
+        "backgroundColor": "#282c34",
+        "foregroundColor": "#44475a",
+        "favouritesColor": "#98c379",
+        "dividerColor": "#abb2bf",
+        "navlinkColor": "#56b6c2"
+    },
+    {
+        "key": "Noctis Light",
+        "primaryColor": "#ff5792",
+        "errorColor": "#ff5792",
+        "textColor": "#121212",
+        "backgroundColor": "#f2f1f8",
+        "foregroundColor": "#0c006b",
+        "favouritesColor": "#00bdd6",
+        "dividerColor": "#9995b7",
+        "navlinkColor": "#5842ff"
     }
 ]

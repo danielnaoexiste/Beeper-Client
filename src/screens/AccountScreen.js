@@ -13,6 +13,7 @@ const AccountScreen = ({ navigation, theme }) => {
     <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
       <Spacer />
       <Text h3 style={[styles.header, {color: theme.textColor}]}>My Account</Text>
+
       <Spacer style={styles.buttonContainer}>
         <Button
           buttonStyle={{ backgroundColor: theme.primaryColor, marginHorizontal: 120, marginTop: 15 }}
@@ -23,7 +24,7 @@ const AccountScreen = ({ navigation, theme }) => {
 
       <Spacer style={styles.buttonContainer}>
         <Button
-          buttonStyle={{ backgroundColor: theme.primaryColor, marginHorizontal: 120, marginTop: 15 }}
+          buttonStyle={{ backgroundColor: theme.primaryColor, marginHorizontal: 120 }}
           titleStyle={{ color: theme.foregroundColor }}
           title='Themes'
           onPress={() => navigation.navigate('Theme')} />

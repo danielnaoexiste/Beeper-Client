@@ -25,6 +25,12 @@ const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
     Signin: SigninScreen,
     Signup: SignupScreen
+  }, {
+    initialRouteName: 'Signin',
+    defaultNavigationOptions: {
+      title: 'Beeper',
+      headerShown: false
+    }
   }),
   mainFlow: createBottomTabNavigator({
     beepListFlow: {
