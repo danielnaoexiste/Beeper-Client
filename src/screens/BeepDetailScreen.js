@@ -6,9 +6,9 @@ import { EvilIcons } from '@expo/vector-icons';
 import { NavigationEvents, SafeAreaView } from 'react-navigation';
 import Spacer from '../components/Spacer'
 import ActionButton from '../components/ActionButton'
-import { theme } from '../theming/themeProvider';
+import { withTheme } from '../theming/themeProvider';
 
-const BeepDetailScreen = ({ navigation }) => {
+const BeepDetailScreen = ({ navigation, theme }) => {
   const { state } = useContext(Context);
   let beepPost = state.find((beepPost) => beepPost._id === navigation.getParam('id'))
   const [title, setTitle] = useState(beepPost.title);
@@ -23,8 +23,8 @@ const BeepDetailScreen = ({ navigation }) => {
           setContent(navigation.getParam('content') ? navigation.getParam('content') : beepPost.content)
         }}
       />
-      <Text style={styles.titleStyle}>{title}</Text>
-      <Text style={styles.contentStyle}>{content}</Text>
+      <Text style={[styles.titleStyle, {color: theme.textColor, borderColor: theme.dividerColor}]}>{title}</Text>
+      <Text style={[styles.contentStyle, {color: theme.textColor}]}>{content}</Text>
 
       <ActionButton
         routeName='BeepEdit'
@@ -49,7 +49,6 @@ BeepDetailScreen.navigationOptions = ({ navigation }) => {
 const styles = StyleSheet.create({
   col: {
     flexDirection: 'column',
-
   },
   titleStyle: {
     fontSize: 24,
@@ -57,17 +56,15 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginHorizontal: 15,
     borderBottomWidth: 1,
-    borderColor: "grey",
-    color: theme.textColor
+    borderColor: "grey"
   },
   contentStyle: {
     fontSize: 18,
     lineHeight: 28,
     textAlign: "justify",
     marginVertical: 10,
-    marginHorizontal: 25,
-    color: theme.textColor
+    marginHorizontal: 25
   }
 });
 
-export default BeepDetailScreen;
+export default withTheme(BeepDetailScreen);

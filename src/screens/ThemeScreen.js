@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
 
-import { themes, theme } from '../theming/themeProvider';
+import { withTheme } from '../theming/themeProvider';
 
-const ThemeScreen = () => {
+const ThemeScreen = ({ theme, themes, setTheme }) => {
 
   renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => console.log(themes)}>
+    <TouchableOpacity onPress={() => setTheme(item.key)}>
       <View
         style={[
           style.itemContainer,
@@ -53,4 +53,4 @@ const style = StyleSheet.create({
   itemText: { fontWeight: 'bold' },
 });
 
-export default ThemeScreen;
+export default withTheme(ThemeScreen);

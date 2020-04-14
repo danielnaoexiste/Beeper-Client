@@ -4,14 +4,14 @@ import { Context as BeepContext } from '../context/BeepContext'
 import { Icon } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation';
 import Swipeable from 'react-native-gesture-handler/Swipeable'
-import { theme } from '../theming/themeProvider';
+import { withTheme } from '../theming/themeProvider';
 
 
-const BeepList = ({ navigation, state, func, starred, leftText, rightText }) => {
+const BeepList = ({ navigation, state, func, starred, leftText, rightText, theme }) => {
   const { deletePost, starPost } = useContext(BeepContext)
 
   return (
-    <View style={{marginBottom: 55, marginTop: 15}}>
+    <View style={{ marginBottom: 55, marginTop: 15 }}>
       <NavigationEvents
         onWillFocus={func}
       />
@@ -28,15 +28,24 @@ const BeepList = ({ navigation, state, func, starred, leftText, rightText }) => 
                 containerStyle
                 onPress={() => starPost(item._id, func, starred)}
                 leftText={leftText}
+                bgColor={{ backgroundColor: theme.favouritesColor }}
+                textColor={ theme.textColor }
               />}
-              renderRightActions={(progress, dragX) => <RightActions progress={progress} dragX={dragX} onPress={() => deletePost(item._id)} rightText={rightText} />}
+              renderRightActions={(progress, dragX) => <RightActions
+                progress={progress}
+                dragX={dragX}
+                onPress={() => deletePost(item._id)}
+                rightText={rightText}
+                bgColor={{ backgroundColor: theme.errorColor }}
+                textColor={ theme.textColor }
+              />}
             >
               <TouchableOpacity onPress={() => navigation.navigate('BeepDetail', { id: item._id })}>
-                <View style={styles.row}>
-                  <Text style={styles.title}>{item.title}</Text>
+                <View style={[styles.row, { borderColor: theme.dividerColor }]}>
+                  <Text style={[styles.title, { color: theme.textColor }]}>{item.title}</Text>
                   {item.starred ? <Icon type='foundation' name='star' size={16} color={theme.textColor} /> : null}
                 </View>
-                <Text style={styles.date}>Last edited in: {item.lastEdited}</Text>
+                <Text style={[styles.date, { color: theme.dividerColor }]}>Last edited in: {item.lastEdited}</Text>
               </TouchableOpacity>
             </Swipeable>
           );
@@ -47,7 +56,7 @@ const BeepList = ({ navigation, state, func, starred, leftText, rightText }) => 
   );
 };
 
-const LeftActions = ({ progress, dragX, onPress, leftText }) => {
+const LeftActions = ({ progress, dragX, onPress, leftText, bgColor, textColor }) => {
 
   const scale = dragX.interpolate({
     inputRange: [0, 75],
@@ -56,16 +65,16 @@ const LeftActions = ({ progress, dragX, onPress, leftText }) => {
   });
 
   return (
-    <TouchableOpacity style={styles.leftAction} onPress={onPress}>
+    <TouchableOpacity style={[styles.leftAction, bgColor]} onPress={onPress}>
       <Animated.View style={{ transform: [{ scale }] }}>
-        <Icon type='foundation' name='star' color={theme.textColor} />
-        <Text style={styles.actionText}>{leftText}</Text>
+        <Icon type='foundation' name='star' color={textColor} />
+        <Text style={[styles.actionText, {color: textColor}]}>{leftText}</Text>
       </Animated.View>
     </TouchableOpacity>
   );
 }
 
-const RightActions = ({ progress, dragX, onPress, rightText }) => {
+const RightActions = ({ progress, dragX, onPress, rightText, bgColor, textColor }) => {
   const scale = dragX.interpolate({
     inputRange: [-75, 0],
     outputRange: [1, 0],
@@ -74,10 +83,10 @@ const RightActions = ({ progress, dragX, onPress, rightText }) => {
 
   return (
 
-    <TouchableOpacity style={styles.rightAction} onPress={onPress}>
+    <TouchableOpacity style={[styles.rightAction, bgColor]} onPress={onPress}>
       <Animated.View style={{ transform: [{ scale }] }}>
-        <Icon type='feather' name='trash' color={theme.textColor} />
-        <Text style={styles.actionText}>{rightText}</Text>
+        <Icon type='feather' name='trash' color={textColor} />
+        <Text style={[styles.actionText, {color: textColor}]}>{rightText}</Text>
       </Animated.View>
     </TouchableOpacity>
   );
@@ -90,38 +99,32 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 10,
     paddingHorizontal: 20,
-    borderTopWidth: 1,
-    borderColor: theme.dividerColor
+    borderTopWidth: 1
   },
   date: {
     paddingBottom: 10,
-    paddingHorizontal: 20,
-    color: theme.dividerColor
+    paddingHorizontal: 20
   },
   title: {
-    fontSize: 18,
-    color: theme.textColor
+    fontSize: 18
   },
   icon: {
     fontSize: 24
   },
   leftAction: {
-    backgroundColor: theme.favouritesColor,
     justifyContent: 'center',
     paddingHorizontal: 15,
     alignItems: "center"
   },
   rightAction: {
-    backgroundColor: theme.errorColor,
     justifyContent: 'center',
     paddingHorizontal: 25,
     alignItems: "flex-end"
   },
   actionText: {
-    color: theme.textColor,
     fontWeight: "600",
     textAlign: 'center'
   },
 });
 
-export default BeepList;
+export default withTheme(BeepList);

@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { StyleSheet } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
 import Spacer from './Spacer';
-import { theme } from '../theming/themeProvider'
+import { withTheme } from '../theming/themeProvider'
 
-const AuthForm = ({ headerText, errorMessage, onSubmit, submitText }) => {
+const AuthForm = ({ headerText, errorMessage, onSubmit, submitText, theme }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     return (
         <>
             <Spacer>
-                <Text style={{ color: '#BB86F6', textAlign: "center" }} h3>{headerText}</Text>
+                <Text style={{ color: theme.primaryColor, textAlign: "center" }} h3>{headerText}</Text>
             </Spacer>
 
             <Spacer />
@@ -44,7 +44,7 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitText }) => {
                 leftIcon={{ type: 'Feather', name: 'lock', marginRight: 15, color: theme.textColor }}
             />
 
-            {errorMessage ? <Text style={styles.errorMessage}>{errorMessage}</Text> : null}
+            {errorMessage ? <Text style={[styles.errorMessage, { color: theme.errorColor }]}>{errorMessage}</Text> : null}
 
             <Spacer />
 
@@ -64,7 +64,6 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitText }) => {
 const styles = StyleSheet.create({
     errorMessage: {
         fontSize: 16,
-        color: theme.errorColor,
         marginLeft: 15,
         marginTop: 15,
     },
@@ -76,4 +75,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default AuthForm;
+export default withTheme(AuthForm);

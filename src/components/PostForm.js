@@ -3,9 +3,9 @@ import { View, StyleSheet } from 'react-native';
 import { Input, Button, Text } from 'react-native-elements';
 import Spacer from './Spacer'
 import { SafeAreaView } from 'react-navigation';
-import { theme } from '../theming/themeProvider';
+import { withTheme } from '../theming/themeProvider';
 
-const PostForm = ({ onSubmit, initialValues }) => {
+const PostForm = ({ onSubmit, initialValues, theme }) => {
   const [title, setTitle] = useState(initialValues.title);
   const [content, setContent] = useState(initialValues.content);
   const lastEdited = new Date().toDateString();
@@ -13,7 +13,7 @@ const PostForm = ({ onSubmit, initialValues }) => {
   return (
     <SafeAreaView forceInset={{ top: 'always' }} style={{backgroundColor: theme.backgroundColor, flex:1}}>
       <Spacer />
-        <Text h3 style={styles.header}>Beep!</Text>
+        <Text h3 style={[styles.header, {color: theme.primaryColor}]}>Beep!</Text>
       <Spacer>
         <Input
           style={{color: theme.textColor}}
@@ -71,8 +71,7 @@ PostForm.defaultProps = {
 
 const styles = StyleSheet.create({
   header: {
-    textAlign: 'center',
-    color: theme.primaryColor
+    textAlign: 'center'
   },
   buttonContainer: {
     marginVertical: 5,
@@ -82,4 +81,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PostForm;
+export default withTheme(PostForm);

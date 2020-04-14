@@ -4,10 +4,11 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Provider as AuthProvider } from './src/context/AuthContext'
 import { Provider as BeepProvider } from './src/context/BeepContext'
+import { ThemeContextProvider } from './src/theming/themeProvider'
 import { setNavigator } from './src/navigationRef'
 import { Icon } from 'react-native-elements';
 
-import { theme } from './src/theming/themeProvider'
+import TabBar from './src/components/TabBar'
 import AccountScreen from './src/screens/AccountScreen'
 import ThemeScreen from './src/screens/ThemeScreen'
 import SigninScreen from './src/screens/SigninScreen'
@@ -18,8 +19,6 @@ import BeepListScreen from './src/screens/BeepListScreen'
 import BeepEditScreen from './src/screens/BeepEditScreen'
 import BeepStarredScreen from './src/screens/BeepStarredScreen'
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen'
-
-global.theme_id = 0;
 
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
@@ -70,16 +69,7 @@ const switchNavigator = createSwitchNavigator({
       },
     }
   }, {
-    defaultNavigationOptions: {
-      tabBarOptions: {
-        style: { height: 50 },
-        activeTintColor: theme.primaryColor,
-        inactiveTintColor: theme.textColor,
-        activeBackgroundColor: theme.backgroundColor,
-        inactiveBackgroundColor: theme.backgroundColor,
-        safeAreaInset: { bottom: 'never' }
-      }
-    }
+    tabBarComponent: props => <TabBar {...props} />,
   })
 })
 
@@ -87,10 +77,12 @@ const App = createAppContainer(switchNavigator);
 
 export default () => {
   return (
-    <BeepProvider>
-      <AuthProvider>
-        <App ref={(navigator) => { setNavigator(navigator) }} />
-      </AuthProvider>
-    </BeepProvider>
+    <ThemeContextProvider>
+      <BeepProvider>
+        <AuthProvider>
+          <App ref={(navigator) => { setNavigator(navigator) }} />
+        </AuthProvider>
+      </BeepProvider>
+    </ThemeContextProvider>
   )
 }

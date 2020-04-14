@@ -4,13 +4,13 @@ import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext';
 import AuthForm from '../components/AuthForm'
 import NavLink from '../components/NavLink'
-import { theme } from "../theming/themeProvider";
+import { withTheme } from "../theming/themeProvider";
 
-const SigninScreen = () => {
+const SigninScreen = ({ theme }) => {
     const { state, signin, clearErrorMessage } = useContext(AuthContext);
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
             <NavigationEvents 
                 onWillBlur={clearErrorMessage}
                 onWillFocus={clearErrorMessage}
@@ -40,9 +40,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        paddingBottom: 20,
-        backgroundColor: theme.backgroundColor
+        paddingBottom: 20
     }
 });
 
-export default SigninScreen;
+export default withTheme(SigninScreen);

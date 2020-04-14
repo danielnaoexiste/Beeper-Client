@@ -6,15 +6,15 @@ import Spacer from '../components/Spacer';
 import { Text } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
 import ActionButton from '../components/ActionButton'
-import { theme } from '../theming/themeProvider';
+import { withTheme } from '../theming/themeProvider';
 
-const BeepListScreen = ({ navigation }) => {
+const BeepListScreen = ({ navigation, theme }) => {
   const { state, getPosts } = useContext(BeepContext)
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }} style={{backgroundColor: theme.backgroundColor, flex: 1 }}>
       <Spacer />
-      <Text h3 style={styles.header}>My Beeps</Text>
+      <Text h3 style={[styles.header, {color: theme.textColor}]}>My Beeps</Text>
       <Spacer>
         <BeepList navigation={navigation} state={state} func={getPosts} starred={true} leftText='Add to Favorites' rightText='Delete' />
       </Spacer>
@@ -29,8 +29,7 @@ const BeepListScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   header: {
-    textAlign: 'center',
-    color: theme.textColor
+    textAlign: 'center'
   },
   actionFloatButton: {
     position: 'absolute',
@@ -47,4 +46,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default BeepListScreen;
+export default withTheme(BeepListScreen);

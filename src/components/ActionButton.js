@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
-import { withNavigation } from 'react-navigation';
-import { theme } from '../theming/themeProvider'
+import { withTheme } from '../theming/themeProvider'
+import { navigate } from '../navigationRef';
 
-const ActionButton = ({ navigation, routeName, iconName }) => {
+const ActionButton = ({ navigation, routeName, iconName, theme }) => {
     return (
-        <TouchableOpacity style={styles.actionFloatButton} onPress={() => navigation.navigate(routeName, { id: navigation.getParam('id') })}>
-            <Icon type='feather' name={iconName} size={35} style={styles.floatButton} />
+        <TouchableOpacity style={[styles.actionFloatButton, {backgroundColor: theme.primaryColor}]} onPress={() => navigate(routeName, { id: navigation.getParam('id') })}>
+            <Icon type='feather' name={iconName} size={35} style={[styles.floatButton, {color: theme.foregroundColor}]} />
         </TouchableOpacity>
     )
 }
@@ -21,13 +21,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         right: 15,
         bottom: 15,
-        backgroundColor: theme.primaryColor,
         borderRadius: 50
     },
     floatButton: {
-        justifyContent: 'space-around',
-        color: theme.foregroundColor
+        justifyContent: 'space-around'
     }
 })
 
-export default withNavigation(ActionButton)
+export default withTheme(ActionButton)

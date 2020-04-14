@@ -5,15 +5,15 @@ import { Text } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
 import { StyleSheet } from 'react-native';
 import Spacer from '../components/Spacer'
-import { theme } from '../theming/themeProvider';
+import { withTheme } from '../theming/themeProvider';
 
-const BeepListScreen = ({ navigation }) => {
+const BeepListScreen = ({ navigation, theme }) => {
   const { state, getStars } = useContext(BeepContext)
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }} style={{backgroundColor: theme.backgroundColor, flex: 1 }}>
       <Spacer />
-      <Text h3 style={styles.header}>Starred Beeps</Text>
+      <Text h3 style={[styles.header, {color: theme.textColor}]}>Starred Beeps</Text>
       <Spacer>
         <BeepList navigation={navigation} state={state} func={getStars} starred={false} leftText='Remove from Favorites' rightText='Delete' />
       </Spacer>
@@ -23,9 +23,8 @@ const BeepListScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   header: {
-    textAlign: 'center',
-    color: theme.textColor
+    textAlign: 'center'
   }
 })
 
-export default BeepListScreen;
+export default withTheme(BeepListScreen);
