@@ -4,6 +4,7 @@ import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext';
 import AuthForm from '../components/AuthForm'
 import NavLink from '../components/NavLink'
+import { theme } from "../theming/themeProvider";
 
 const SigninScreen = () => {
     const { state, signin, clearErrorMessage } = useContext(AuthContext);
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         paddingBottom: 20,
-        backgroundColor: '#343434'
+        backgroundColor: theme.backgroundColor
     }
 });
 

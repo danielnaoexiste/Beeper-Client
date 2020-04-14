@@ -1,0 +1,26 @@
+[
+    {
+        "id": 0,
+        "key": "DRACULA",
+        "primaryColor": "#bd93f9",
+        "errorColor": "#ff5555",
+        "textColor": "#fff",
+        "backgroundColor": "#282a36",
+        "foregroundColor": "#44475a",
+        "favouritesColor": "#678f75",
+        "dividerColor": "#f8f8f2" ,
+        "navlinkColor": "#6272a4"
+    },
+    {
+        "id": 1,
+        "key": "BEEPER-CLASSIC",
+        "primaryColor": "#BB86F6",
+        "errorColor": "#c33b3b",
+        "textColor": "#fff",
+        "backgroundColor": "#343434",
+        "foregroundColor": "#121212",
+        "favouritesColor": "#678f75",
+        "dividerColor":  "#808080",
+        "navlinkColor": "#7777ff"
+    }
+]

@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Spacer from './Spacer';
 import { withNavigation } from 'react-navigation';
+import { theme } from '../theming/themeProvider';
 
 const NavLink = ({ navigation, text, routeName }) => {
     return (
@@ -15,7 +16,7 @@ const NavLink = ({ navigation, text, routeName }) => {
 
 const styles = StyleSheet.create({
     link: {
-        color: '#7777ff',
+        color: theme.navlinkColor,
         fontSize: 16
     }
 });

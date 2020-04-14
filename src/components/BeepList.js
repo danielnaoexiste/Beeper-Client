@@ -4,6 +4,8 @@ import { Context as BeepContext } from '../context/BeepContext'
 import { Icon } from 'react-native-elements'
 import { NavigationEvents } from 'react-navigation';
 import Swipeable from 'react-native-gesture-handler/Swipeable'
+import { theme } from '../theming/themeProvider';
+
 
 const BeepList = ({ navigation, state, func, starred, leftText, rightText }) => {
   const { deletePost, starPost } = useContext(BeepContext)
@@ -32,7 +34,7 @@ const BeepList = ({ navigation, state, func, starred, leftText, rightText }) => 
               <TouchableOpacity onPress={() => navigation.navigate('BeepDetail', { id: item._id })}>
                 <View style={styles.row}>
                   <Text style={styles.title}>{item.title}</Text>
-                  {item.starred ? <Icon type='foundation' name='star' size={16} color='#fff' /> : null}
+                  {item.starred ? <Icon type='foundation' name='star' size={16} color={theme.textColor} /> : null}
                 </View>
                 <Text style={styles.date}>Last edited in: {item.lastEdited}</Text>
               </TouchableOpacity>
@@ -56,7 +58,7 @@ const LeftActions = ({ progress, dragX, onPress, leftText }) => {
   return (
     <TouchableOpacity style={styles.leftAction} onPress={onPress}>
       <Animated.View style={{ transform: [{ scale }] }}>
-        <Icon type='foundation' name='star' color='#fff' />
+        <Icon type='foundation' name='star' color={theme.textColor} />
         <Text style={styles.actionText}>{leftText}</Text>
       </Animated.View>
     </TouchableOpacity>
@@ -74,7 +76,7 @@ const RightActions = ({ progress, dragX, onPress, rightText }) => {
 
     <TouchableOpacity style={styles.rightAction} onPress={onPress}>
       <Animated.View style={{ transform: [{ scale }] }}>
-        <Icon type='feather' name='trash' color='#fff' />
+        <Icon type='feather' name='trash' color={theme.textColor} />
         <Text style={styles.actionText}>{rightText}</Text>
       </Animated.View>
     </TouchableOpacity>
@@ -89,34 +91,34 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 20,
     borderTopWidth: 1,
-    borderColor: 'grey'
+    borderColor: theme.dividerColor
   },
   date: {
     paddingBottom: 10,
     paddingHorizontal: 20,
-    color: 'grey'
+    color: theme.dividerColor
   },
   title: {
     fontSize: 18,
-    color: '#fff'
+    color: theme.textColor
   },
   icon: {
     fontSize: 24
   },
   leftAction: {
-    backgroundColor: "#678f75",
+    backgroundColor: theme.favouritesColor,
     justifyContent: 'center',
     paddingHorizontal: 15,
     alignItems: "center"
   },
   rightAction: {
-    backgroundColor: "#c33b3b",
+    backgroundColor: theme.errorColor,
     justifyContent: 'center',
     paddingHorizontal: 25,
     alignItems: "flex-end"
   },
   actionText: {
-    color: "#fff",
+    color: theme.textColor,
     fontWeight: "600",
     textAlign: 'center'
   },

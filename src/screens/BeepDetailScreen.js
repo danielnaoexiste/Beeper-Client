@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-elements';
 import { Context } from '../context/BeepContext';
 import { EvilIcons } from '@expo/vector-icons';
 import { NavigationEvents, SafeAreaView } from 'react-navigation';
 import Spacer from '../components/Spacer'
 import ActionButton from '../components/ActionButton'
+import { theme } from '../theming/themeProvider';
 
 const BeepDetailScreen = ({ navigation }) => {
   const { state } = useContext(Context);
@@ -14,7 +15,7 @@ const BeepDetailScreen = ({ navigation }) => {
   const [content, setContent] = useState(beepPost.content);
 
   return (
-    <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: "#343434" , flex: 1}}>
+    <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: theme.backgroundColor , flex: 1}}>
       <Spacer />
       <NavigationEvents
         onWillFocus={() => {
@@ -38,7 +39,7 @@ BeepDetailScreen.navigationOptions = ({ navigation }) => {
   return {
     headerRight: () => (
       <TouchableOpacity style={{ right: 15 }} onPress={() => navigation.navigate('BeepEdit', { id: navigation.getParam('id') })}>
-        <EvilIcons name='pencil' size={30} style={{ color: '#fff' }} />
+        <EvilIcons name='pencil' size={30} style={{ color: theme.textColor }} />
       </TouchableOpacity>
     ),
     title: "Beep"
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     borderBottomWidth: 1,
     borderColor: "grey",
-    color: '#fff'
+    color: theme.textColor
   },
   contentStyle: {
     fontSize: 18,
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     textAlign: "justify",
     marginVertical: 10,
     marginHorizontal: 25,
-    color: '#fff'
+    color: theme.textColor
   }
 });
 

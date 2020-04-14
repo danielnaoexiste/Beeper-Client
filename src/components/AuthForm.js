@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
 import Spacer from './Spacer';
+import { theme } from '../theming/themeProvider'
 
 const AuthForm = ({ headerText, errorMessage, onSubmit, submitText }) => {
     const [email, setEmail] = useState('');
@@ -10,29 +11,29 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitText }) => {
     return (
         <>
             <Spacer>
-                <Text style={{color: '#BB86F6', textAlign: "center"}} h3>{headerText}</Text>
+                <Text style={{ color: '#BB86F6', textAlign: "center" }} h3>{headerText}</Text>
             </Spacer>
 
             <Spacer />
-            
+
             <Input
                 label="Email"
-                inputStyle={{ color: '#fff' }}
-                labelStyle={{ color: '#fff' }}
+                inputStyle={{ color: theme.textColor }}
+                labelStyle={{ color: theme.textColor }}
                 placeholder="email@adress.com"
                 value={email}
                 onChangeText={setEmail}
                 autoCapitalize='none'
                 autoCorrect={false}
-                leftIcon={{ type: 'Feather', name: 'mail', marginRight: 15, color: '#fff' }}
+                leftIcon={{ type: 'Feather', name: 'mail', marginRight: 15, color: theme.textColor }}
             />
 
 
             <Spacer />
 
             <Input
-                inputStyle={{ color: '#fff' }}
-                labelStyle={{ color: '#fff' }}
+                inputStyle={{ color: theme.textColor }}
+                labelStyle={{ color: theme.textColor }}
                 secureTextEntry
                 placeholder="Password"
                 label="Password"
@@ -40,7 +41,7 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitText }) => {
                 onChangeText={setPassword}
                 autoCapitalize='none'
                 autoCorrect={false}
-                leftIcon={{ type: 'Feather', name: 'lock', marginRight: 15, color: '#fff' }}
+                leftIcon={{ type: 'Feather', name: 'lock', marginRight: 15, color: theme.textColor }}
             />
 
             {errorMessage ? <Text style={styles.errorMessage}>{errorMessage}</Text> : null}
@@ -48,7 +49,13 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitText }) => {
             <Spacer />
 
             <Spacer style={styles.buttonContainer}>
-                <Button buttonStyle={{backgroundColor: '#BB86F6', marginHorizontal: 120}} titleStyle={{color: '#282d34'}} title={submitText} onPress={() => onSubmit({ email, password })} />
+                <Button buttonStyle={{
+                    backgroundColor: theme.primaryColor,
+                    marginHorizontal: 120
+                }}
+                    titleStyle={{ color: theme.foregroundColor }}
+                    title={submitText}
+                    onPress={() => onSubmit({ email, password })} />
             </Spacer>
         </>
     )
@@ -57,7 +64,7 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitText }) => {
 const styles = StyleSheet.create({
     errorMessage: {
         fontSize: 16,
-        color: '#c33b3b',
+        color: theme.errorColor,
         marginLeft: 15,
         marginTop: 15,
     },
@@ -66,7 +73,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
         flexDirection: 'row',
         justifyContent: "center"
-      }
+    }
 })
 
 export default AuthForm;

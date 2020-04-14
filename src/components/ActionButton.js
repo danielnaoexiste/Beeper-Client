@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 import { withNavigation } from 'react-navigation';
+import { theme } from '../theming/themeProvider'
 
 const ActionButton = ({ navigation, routeName, iconName }) => {
     return (
@@ -20,12 +21,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         right: 15,
         bottom: 15,
-        backgroundColor: '#BB86F6',
+        backgroundColor: theme.primaryColor,
         borderRadius: 50
     },
     floatButton: {
         justifyContent: 'space-around',
-        color: '#121212'
+        color: theme.foregroundColor
     }
 })
 

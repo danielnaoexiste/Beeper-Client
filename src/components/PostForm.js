@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Input, Button, Text } from 'react-native-elements';
 import Spacer from './Spacer'
 import { SafeAreaView } from 'react-navigation';
-
+import { theme } from '../theming/themeProvider';
 
 const PostForm = ({ onSubmit, initialValues }) => {
   const [title, setTitle] = useState(initialValues.title);
@@ -11,15 +11,15 @@ const PostForm = ({ onSubmit, initialValues }) => {
   const lastEdited = new Date().toDateString();
 
   return (
-    <SafeAreaView forceInset={{ top: 'always' }} style={{backgroundColor: "#343434", flex:1}}>
+    <SafeAreaView forceInset={{ top: 'always' }} style={{backgroundColor: theme.backgroundColor, flex:1}}>
       <Spacer />
         <Text h3 style={styles.header}>Beep!</Text>
       <Spacer>
         <Input
-          style={{color: '#fff'}}
+          style={{color: theme.textColor}}
           label='Title'
-          inputStyle={{color: '#fff'}}
-          labelStyle={{color: '#fff'}}
+          inputStyle={{color: theme.textColor}}
+          labelStyle={{color: theme.textColor}}
           blurOnSubmit={false}
           autoFocus
           placeholder='Title'
@@ -34,8 +34,8 @@ const PostForm = ({ onSubmit, initialValues }) => {
       <Spacer>
         <Input
           ref={secondInput => this.secondInput = secondInput}
-          labelStyle={{color: '#fff'}}
-          inputStyle={{color: '#fff'}}
+          labelStyle={{color: theme.textColor}}
+          inputStyle={{color: theme.textColor}}
           blurOnSubmit={false}
           label='Content'
           multiline
@@ -53,8 +53,8 @@ const PostForm = ({ onSubmit, initialValues }) => {
         <Button
           raised
           title="Save Beep"
-          buttonStyle={{backgroundColor: '#BB86F6'}}
-          titleStyle={{color: '#282d34'}}
+          buttonStyle={{backgroundColor: theme.primaryColor}}
+          titleStyle={{color: theme.foregroundColor}}
           onPress={() => onSubmit(title, content, lastEdited)}
         />
       </View>
@@ -72,7 +72,7 @@ PostForm.defaultProps = {
 const styles = StyleSheet.create({
   header: {
     textAlign: 'center',
-    color: '#BB86F6'
+    color: theme.primaryColor
   },
   buttonContainer: {
     marginVertical: 5,
