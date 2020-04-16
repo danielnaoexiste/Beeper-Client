@@ -1,49 +1,58 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, AsyncStorage } from 'react-native';
 import { Text } from 'react-native-elements';
 import { Context } from '../context/BeepContext';
-import { EvilIcons } from '@expo/vector-icons';
 import { NavigationEvents, SafeAreaView } from 'react-navigation';
 import Spacer from '../components/Spacer'
 import ActionButton from '../components/ActionButton'
 import { withTheme } from '../theming/themeProvider';
 
 const BeepDetailScreen = ({ navigation, theme }) => {
-  const { state } = useContext(Context);
-  let beepPost = state.find((beepPost) => beepPost._id === navigation.getParam('id'))
-  const [title, setTitle] = useState(beepPost.title);
-  const [content, setContent] = useState(beepPost.content);
+  try {
+    const { state } = useContext(Context);
 
-  return (
-    <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: theme.backgroundColor , flex: 1}}>
-      <Spacer />
-      <NavigationEvents
-        onWillFocus={() => {
-          setTitle(navigation.getParam('title') ? navigation.getParam('title') : beepPost.title)
-          setContent(navigation.getParam('content') ? navigation.getParam('content') : beepPost.content)
-        }}
-      />
-      <Text style={[styles.titleStyle, {color: theme.textColor, borderColor: theme.dividerColor}]}>{title}</Text>
-      <Text style={[styles.contentStyle, {color: theme.textColor}]}>{content}</Text>
+    let beepPost = state.find((beepPost) => beepPost._id === navigation.getParam('id'))
 
-      <ActionButton
-        routeName='BeepEdit'
-        iconName='edit'
-        radius={100}
-      />
+    const [title, setTitle] = useState(beepPost.title);
+    const [content, setContent] = useState(beepPost.content);
+
+    return (
+      <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
+        <Spacer />
+        <NavigationEvents
+          onWillFocus={() => {
+
+            setTitle(navigation.getParam('title') ? navigation.getParam('title') : beepPost.title)
+            setContent(navigation.getParam('content') ? navigation.getParam('content') : beepPost.content)
+          }}
+        />
+        <Text style={[styles.titleStyle, { color: theme.textColor, borderColor: theme.dividerColor }]}>{title}</Text>
+        <Text style={[styles.contentStyle, { color: theme.textColor }]}>{content}</Text>
+
+        <ActionButton
+          routeName='BeepEdit'
+          iconName='edit'
+          radius={100}
+        />
+      </SafeAreaView>
+    );
+  } catch (e) {
+    return <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
+      <Text style={[styles.titleStyle, { color: theme.textColor, borderColor: theme.dividerColor }]}>Something went wrong!</Text>
+      <Text style={[styles.contentStyle, { color: theme.textColor }]}>Please re-open the beep!</Text>
     </SafeAreaView>
-  );
+  }
 };
 
 BeepDetailScreen.navigationOptions = ({ navigation }) => {
-  return {
-    headerRight: () => (
-      <TouchableOpacity style={{ right: 15 }} onPress={() => navigation.navigate('BeepEdit', { id: navigation.getParam('id') })}>
-        <EvilIcons name='pencil' size={30} style={{ color: theme.textColor }} />
-      </TouchableOpacity>
-    ),
-    title: "Beep"
-  };
+  // let tabBarVisible = true;
+  // if (navigation.state.index > 0) {
+  //   tabBarVisible = false;
+  // }
+
+  // return {
+  //   tabBarVisible,
+  // };
 };
 
 const styles = StyleSheet.create({
