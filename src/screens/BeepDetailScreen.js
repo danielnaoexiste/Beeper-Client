@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, AsyncStorage } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import { Context } from '../context/BeepContext';
 import { NavigationEvents, SafeAreaView } from 'react-navigation';
@@ -37,23 +37,20 @@ const BeepDetailScreen = ({ navigation, theme }) => {
       </SafeAreaView>
     );
   } catch (e) {
-    return <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
-      <Text style={[styles.titleStyle, { color: theme.textColor, borderColor: theme.dividerColor }]}>Something went wrong!</Text>
-      <Text style={[styles.contentStyle, { color: theme.textColor }]}>Please re-open the beep!</Text>
-    </SafeAreaView>
+    return (
+      <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
+        <Spacer />
+        <NavigationEvents
+          onWillFocus={() => {
+            navigation.navigate('BeepList')
+          }}
+        />
+      </SafeAreaView>
+    )
   }
 };
 
-BeepDetailScreen.navigationOptions = ({ navigation }) => {
-  // let tabBarVisible = true;
-  // if (navigation.state.index > 0) {
-  //   tabBarVisible = false;
-  // }
-
-  // return {
-  //   tabBarVisible,
-  // };
-};
+BeepDetailScreen.navigationOptions = ({ navigation }) => { };
 
 const styles = StyleSheet.create({
   col: {
