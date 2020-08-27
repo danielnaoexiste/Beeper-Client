@@ -1,10 +1,10 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { BottomTabBar } from 'react-navigation-tabs';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { BottomTabBar } from "react-navigation-tabs";
 
-import { withTheme } from '../theming/themeProvider';
+import { withTheme } from "../theming/themeProvider";
 
-const TabBar = props => {
+const TabBar = (props) => {
   return (
     <BottomTabBar
       {...props}
@@ -13,7 +13,7 @@ const TabBar = props => {
       inactiveTintColor={props.theme.textColor}
       activeBackgroundColor={props.theme.foregroundColor}
       inactiveBackgroundColor={props.theme.foregroundColor}
-      safeAreaInset={{ bottom: 'never' }}
+      safeAreaInset={{ bottom: "never" }}
     />
   );
 };

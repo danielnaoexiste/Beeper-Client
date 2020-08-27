@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Input, Button, Text } from 'react-native-elements';
-import Spacer from './Spacer'
-import { SafeAreaView } from 'react-navigation';
-import { withTheme } from '../theming/themeProvider';
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
+import { Input, Button, Text } from "react-native-elements";
+import Spacer from "./Spacer";
+import { SafeAreaView } from "react-navigation";
+import { withTheme } from "../theming/themeProvider";
 
 const PostForm = ({ onSubmit, initialValues, theme }) => {
   const [title, setTitle] = useState(initialValues.title);
@@ -11,50 +11,52 @@ const PostForm = ({ onSubmit, initialValues, theme }) => {
   const lastEdited = new Date().toDateString();
 
   return (
-    <SafeAreaView forceInset={{ top: 'always' }} style={{backgroundColor: theme.backgroundColor, flex:1}}>
+    <SafeAreaView
+      forceInset={{ top: "always" }}
+      style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
       <Spacer />
-        <Text h3 style={[styles.header, {color: theme.primaryColor}]}>Beep!</Text>
+      <Text h3 style={[styles.header, { color: theme.primaryColor }]}>
+        Beep!
+      </Text>
       <Spacer>
         <Input
-          style={{color: theme.textColor}}
-          label='Title'
-          inputStyle={{color: theme.textColor}}
-          labelStyle={{color: theme.textColor}}
+          style={{ color: theme.textColor }}
+          label="Title"
+          inputStyle={{ color: theme.textColor }}
+          labelStyle={{ color: theme.textColor }}
           blurOnSubmit={false}
           autoFocus
-          placeholder='Title'
+          placeholder="Title"
           value={title}
-          onChangeText={text => setTitle(text)}
+          onChangeText={(text) => setTitle(text)}
           returnKeyType={"next"}
-          blurOnSubmit={false}
           onSubmitEditing={() => this.secondInput && this.secondInput.focus()}
-          />
-
+        />
       </Spacer>
       <Spacer>
         <Input
-          ref={secondInput => this.secondInput = secondInput}
-          labelStyle={{color: theme.textColor}}
-          inputStyle={{color: theme.textColor}}
+          ref={(secondInput) => (this.secondInput = secondInput)}
+          labelStyle={{ color: theme.textColor }}
+          inputStyle={{ color: theme.textColor, maxHeight: 100 }}
           blurOnSubmit={false}
-          label='Content'
+          label="Content"
           multiline
           numberOfLines={5}
           maxLength={256}
-          textAlignVertical='top'
-          placeholder='Content'
+          maxHeight
+          textAlignVertical="top"
+          placeholder="Content"
           value={content}
-          onChangeText={text => setContent(text)}
-          returnKeyType='done'
+          onChangeText={(text) => setContent(text)}
+          returnKeyType="done"
         />
-
       </Spacer>
       <View style={styles.buttonContainer}>
         <Button
           raised
           title="Save Beep"
-          buttonStyle={{backgroundColor: theme.primaryColor}}
-          titleStyle={{color: theme.foregroundColor}}
+          buttonStyle={{ backgroundColor: theme.primaryColor }}
+          titleStyle={{ color: theme.foregroundColor }}
           onPress={() => onSubmit(title, content, lastEdited)}
         />
       </View>
@@ -64,21 +66,21 @@ const PostForm = ({ onSubmit, initialValues, theme }) => {
 
 PostForm.defaultProps = {
   initialValues: {
-    title: '',
-    content: ''
-  }
-}
+    title: "",
+    content: "",
+  },
+};
 
 const styles = StyleSheet.create({
   header: {
-    textAlign: 'center'
+    textAlign: "center",
   },
   buttonContainer: {
     marginVertical: 5,
     marginHorizontal: 15,
-    flexDirection: 'row',
-    justifyContent: "center"
-  }
+    flexDirection: "row",
+    justifyContent: "center",
+  },
 });
 
 export default withTheme(PostForm);

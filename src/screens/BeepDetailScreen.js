@@ -1,60 +1,77 @@
-import React, { useContext, useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
-import { Context } from '../context/BeepContext';
-import { NavigationEvents, SafeAreaView } from 'react-navigation';
-import Spacer from '../components/Spacer'
-import ActionButton from '../components/ActionButton'
-import { withTheme } from '../theming/themeProvider';
+import React, { useContext, useState } from "react";
+import { StyleSheet } from "react-native";
+import { Text } from "react-native-elements";
+import { Context } from "../context/BeepContext";
+import { NavigationEvents, SafeAreaView } from "react-navigation";
+import Spacer from "../components/Spacer";
+import ActionButton from "../components/ActionButton";
+import { withTheme } from "../theming/themeProvider";
 
 const BeepDetailScreen = ({ navigation, theme }) => {
   try {
     const { state } = useContext(Context);
 
-    let beepPost = state.find((beepPost) => beepPost._id === navigation.getParam('id'))
+    let beepPost = state.find(
+      (beepPost) => beepPost._id === navigation.getParam("id")
+    );
 
     const [title, setTitle] = useState(beepPost.title);
     const [content, setContent] = useState(beepPost.content);
 
     return (
-      <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
+      <SafeAreaView
+        forceInset={{ top: "always" }}
+        style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
         <Spacer />
         <NavigationEvents
           onWillFocus={() => {
-
-            setTitle(navigation.getParam('title') ? navigation.getParam('title') : beepPost.title)
-            setContent(navigation.getParam('content') ? navigation.getParam('content') : beepPost.content)
+            setTitle(
+              navigation.getParam("title")
+                ? navigation.getParam("title")
+                : beepPost.title
+            );
+            setContent(
+              navigation.getParam("content")
+                ? navigation.getParam("content")
+                : beepPost.content
+            );
           }}
         />
-        <Text style={[styles.titleStyle, { color: theme.textColor, borderColor: theme.dividerColor }]}>{title}</Text>
-        <Text style={[styles.contentStyle, { color: theme.textColor }]}>{content}</Text>
+        <Text
+          style={[
+            styles.titleStyle,
+            { color: theme.textColor, borderColor: theme.dividerColor },
+          ]}>
+          {title}
+        </Text>
+        <Text style={[styles.contentStyle, { color: theme.textColor }]}>
+          {content}
+        </Text>
 
-        <ActionButton
-          routeName='BeepEdit'
-          iconName='edit'
-          radius={100}
-        />
+        <ActionButton routeName="BeepEdit" iconName="edit" radius={100} />
       </SafeAreaView>
     );
   } catch (e) {
     return (
-      <SafeAreaView forceInset={{ top: 'always' }} style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
+      <SafeAreaView
+        forceInset={{ top: "always" }}
+        style={{ backgroundColor: theme.backgroundColor, flex: 1 }}>
         <Spacer />
         <NavigationEvents
           onWillFocus={() => {
-            navigation.navigate('BeepList')
+            navigation.navigate("BeepList");
           }}
         />
       </SafeAreaView>
-    )
+    );
   }
 };
 
-BeepDetailScreen.navigationOptions = ({ navigation }) => { };
+BeepDetailScreen.navigationOptions = ({ navigation }) => {};
 
 const styles = StyleSheet.create({
   col: {
-    flexDirection: 'column',
+    flexDirection: "column",
   },
   titleStyle: {
     fontSize: 24,
@@ -62,15 +79,15 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginHorizontal: 15,
     borderBottomWidth: 1,
-    borderColor: "grey"
+    borderColor: "grey",
   },
   contentStyle: {
     fontSize: 18,
     lineHeight: 28,
     textAlign: "justify",
     marginVertical: 10,
-    marginHorizontal: 25
-  }
+    marginHorizontal: 25,
+  },
 });
 
 export default withTheme(BeepDetailScreen);
